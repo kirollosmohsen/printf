@@ -17,9 +17,9 @@
 
 typedef struct format
 {
-	char *ph;
-	int (*function)();
-} convert;
+	char *id;
+	int (*f)();
+} convert_match;
 
 int _putchar(char c);
 int _printf(const char *format, ...);
@@ -27,8 +27,9 @@ int print_percent(va_list args);
 int printf_char(va_list val);
 int printf_string(va_list val);
 int _putchar(char c);
-int print_int(va_list args);
-int print_37(void);
+int printf_int(va_list args);
+int printf_37(void);
+int printf_dec(va_list args);
 int _strlen(char *s);
 int _strlenc(const char *s);
 
