@@ -27,5 +27,6 @@ int print_c(va_list val);
 int print_s(va_list val);
 int print_37(void);
 int _strlen(char *s);
+int _strlenc(const char *s);
 
 #endif
