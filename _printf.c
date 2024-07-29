@@ -5,39 +5,35 @@
  * @format: identifier to look for.
  * Return: the length of the string.
  */
- 
-int _printf(const char * const format, ...)
+int _printf(const char *format, ...)
 {
-	convert p[] = {
-		{"%s", print_s}, {"%c", print_c},
-		{"%%", print_37}
-	};
+    int i, printed = 0;
+    va_list args;
+    int (*func)(va_list);
 
-	va_list args;
-	int i = 0, j, length = 0;
+    va_start(args, format);
 
-	va_start(args, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-		return (-1);
+    for (i = 0; format && format[i] != '\0'; i++)
+    {
+        if (format[i] == '%')
+        {
+            switch (format[++i])
+            {
+                case 'c': func = print_char; break;
+                case 's': func = print_string; break;
+                case '%': func = print_percent; break;
+                case 'd': case 'i': func = print_int; break;
+                default: _putchar('%'); _putchar(format[i]); printed += 2; continue;
+            }
+            printed += func(args);
+        }
+        else
+        {
+            _putchar(format[i]);
+            printed++;
+        }
+    }
 
-Here:
-	while (format[i] != '\0')
-	{
-		j = 2;
-		while (j >= 0)
-		{
-			if (p[j].ph[0] == format[i] && p[j].ph[1] == format[i + 1])
-			{
-				length += p[j].function(args);
-				i = i + 2;
-				goto Here;
-			}
-			j--;
-		}
-		_putchar(format[i]);
-		length++;
-		i++;
-	}
-	va_end(args);
-	return (length);
-}
+    va_end(args);
+    return printed;
+} 
