@@ -1,48 +1,41 @@
 #include "main.h"
-
 /**
  * _printf - is a function that selects the correct function to print.
  * @format: identifier to look for.
  * Return: the length of the string.
  */
-typedef struct convert
-{
-    char *ph;
-    int (*function)(va_list);
-} convert;
-
 int _printf(const char * const format, ...)
 {
-        convert p[] = {
-                {"%s", print_s}, {"%c", print_c},
-                {"%%", print_37}
-        };
+	convert_match m[] = {
+		{"%s", printf_string}, {"%c", printf_char},
+		{"%%", printf_37},
+		{"%i", printf_int}
+};
+va_list args;
+	int i = 0, j, len = 0;
 
-        va_list args;
-        int i = 0, j, length = 0;
-
-        va_start(args, format);
-        if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-                return (-1);
+	va_start(args, format);
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
 
 Here:
-        while (format[i] != '\0')
-        {
-                j = 2;
-                while (j >= 0)
-                {
-                        if (p[j].ph[0] == format[i] && p[j].ph[1] == format[i + 1])
-                        {
-                                length += p[j].function(args);
-                                i = i + 2;
-                                goto Here;
-                        }
-                        j--;
-                }
-                _putchar(format[i]);
-                length++;
-                i++;
-        }
-        va_end(args);
-        return (length);
-} 
+	while (format[i] != '\0')
+	{
+		j = 4;
+		while (j >= 0)
+		{
+			if (m[j].id[0] == format[i] && m[j].id[1] == format[i + 1])
+			{
+				len += m[j].f(args);
+				i = i + 2;
+				goto Here;
+			}
+			j--;
+		}
+		_putchar(format[i]);
+		len++;
+		i++;
+	}
+	va_end(args);
+	return (len);
+}
