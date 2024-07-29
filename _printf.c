@@ -5,6 +5,11 @@
  * @format: identifier to look for.
  * Return: the length of the string.
  */
+typedef struct convert
+{
+    char *ph;
+    int (*function)(va_list);
+} convert;
 
 int _printf(const char * const format, ...)
 {
