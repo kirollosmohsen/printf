@@ -39,3 +39,55 @@ Here:
 	va_end(args);
 	return (len);
 }
+int _putchar(char c)
+{
+    return write(1, &c, 1);
+}
+
+int print_c(va_list args)
+{
+    return _putchar(va_arg(args, int));
+}
+
+int print_s(va_list args)
+{
+    char *str = va_arg(args, char *);
+    int length = 0;
+    if (str == NULL)
+        str = "(null)";
+    while (*str)
+    {
+        _putchar(*str++);
+        length++;
+    }
+    return length;
+}
+
+int print_37(va_list args)
+{
+    return _putchar('%');
+}
+
+int print_d(va_list args)
+{
+    int num = va_arg(args, int);
+    int length = 0;
+
+    if (num < 0)
+    {
+        _putchar('-');
+        num = -num;
+        length++;
+    }
+
+    if (num / 10)
+        length += print_d((va_list) &num); /* Recursive call to handle multi-digit numbers */
+    _putchar(num % 10 + '0');
+    length++;
+    return length;
+}
+
+int print_i(va_list args)
+{
+    return print_d(args); /* Similar to print_d, as i and d are treated the same */
+}
