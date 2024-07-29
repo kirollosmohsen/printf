@@ -13,6 +13,6 @@ int print_c(va_list val)
 	char a;
 
 	a = va_arg(val, int);
-	_putchar(s);
+	_putchar(a);
 	return (1);
 }
