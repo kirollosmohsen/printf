@@ -28,6 +28,10 @@ int print_s(va_list val);
 int print_37(void);
 int print_i(va_list val);
 int print_d(va_list val);
+int print_unsigned(va_list val);
+int print_oct(va_list val);
+int print_HEX(va_list val);
+int print_hex(va_list val);
 int _strlen(char *s);
 int _strlenc(const char *s);
 
