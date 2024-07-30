@@ -39,4 +39,6 @@ Here:
 		length++;
 		i++;
 	}
+	va_end(args);
+	return (length);
 }
