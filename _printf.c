@@ -11,7 +11,9 @@ int _printf(const char * const format, ...)
 	convert p[] = {
 		{"%s", print_s},
 		{"%c", print_c},
-		{"%%", print_37}
+		{"%%", print_37},
+		{"%d", print_d},
+		{"%i", print_i}
 	};
 
 	va_list args;
@@ -24,7 +26,7 @@ int _printf(const char * const format, ...)
 Here:
 	while (format[i] != '\0')
 	{
-		j = 2;
+		j = 4;
 		while (j >= 0)
 		{
 			if (p[j].ph[0] == format[i] && p[j].ph[1] == format[i + 1])
