@@ -17,7 +17,8 @@ int _printf(const char * const format, ...)
 		{"%u", print_unsigned},
 		{"%o", print_oct},
 		{"%x", print_hex},
-		{"%X", print_HEX}
+		{"%X", print_HEX},
+		{"%b", print_bin}
 	};
 
 	va_list args;
@@ -30,7 +31,7 @@ int _printf(const char * const format, ...)
 Here:
 	while (format[i] != '\0')
 	{
-		j = 8;
+		j = 9;
 		while (j >= 0)
 		{
 			if (p[j].ph[0] == format[i] && p[j].ph[1] == format[i + 1])
