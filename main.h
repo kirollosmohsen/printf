@@ -34,6 +34,6 @@ int print_HEX(va_list val);
 int print_hex(va_list val);
 int _strlen(char *s);
 int _strlenc(const char *s);
-int print1_bin(va_list val);
+int print_bin(va_list val);
 
 #endif
